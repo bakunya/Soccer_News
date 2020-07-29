@@ -1,0 +1,196 @@
+@import url("../materialize/css/materialize.min.css");
+#slider {
+  position: relative;
+}
+.mobile-nav > *:active {
+  color: black;
+}
+nav {
+  background: #000;
+  z-index: 9;
+  line-height: 10px;
+}
+nav.navigasi > .nav-wrapper {
+  padding: 1.4rem;
+  margin-bottom: 0;
+}
+#logo {
+  letter-spacing: 1px;
+}
+.card-container {
+  margin: auto;
+}
+.topnav li > a {
+  letter-spacing: 1px;
+}
+.topnav li > a:active,
+nav .nav-wrapper .brand-logo:active {
+  opacity: 0;
+}
+.topnav li > a:hover {
+  color: rgb(211, 211, 211);
+}
+.table-name-club {
+  width: 300px;
+}
+tbody tr td a:hover {
+  color: black;
+}
+.table-club-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dropdown-trigger {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+.dropdown-trigger.btn {
+  transition: 0.5s;
+}
+.dropdown-trigger.btn,
+.btn-back {
+  background-color: black;
+  color: white;
+}
+.dropdown-trigger:hover,
+a.btn-back:hover {
+  color: black;
+  background-color: white;
+}
+.option-dropdown {
+  padding: 1rem;
+  font-weight: 500;
+}
+.dropdown-content li {
+  background-color: black;
+  color: white;
+}
+.dropdown-content li:hover {
+  color: black;
+}
+.group-standings {
+  margin-top: 10rem;
+  font-size: 1.2rem;
+  border-bottom: 2px solid black;
+  margin-bottom: 0.5rem;
+  font-weight: bolder;
+}
+.title {
+  font-weight: bolder;
+}
+.nav-team-details {
+  opacity: 1;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+.container.team-detail {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.static {
+  position: static;
+}
+.title-team {
+  font-size: 3rem;
+}
+.team-schedule {
+  padding: 1rem;
+}
+a#link:hover {
+  color: black;
+}
+.card .card-content {
+  padding-left: 0;
+}
+.card-image {
+  padding: 1rem;
+  width: 113px;
+}
+#bold {
+  font-weight: bold;
+}
+#undo-loading {
+  display: flex;
+  justify-content: center;
+}
+.overlay {
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#o1 {
+  opacity: 0.3;
+  background: black;
+}
+#o2 {
+  opacity: 0.5;
+  background: black;
+}
+#o3 {
+  opacity: 0.3;
+  background: black;
+}
+#o4 {
+  opacity: 0.5;
+  background: black;
+}
+.btn-reload-clear {
+  display: none;
+  transform: scale(0) rotate(360deg);
+}
+.btn-reload-scale {
+  display: block;
+  transition: 1s;
+  transform: scale(1) rotate(180deg);
+}
+#icon-color {
+  color: #b0bec5;
+}
+@media (max-width: 1000px) {
+  nav {
+    position: static;
+    background: black;
+    z-index: 9;
+
+    line-height: 60px;
+  }
+  nav.navigasi > .nav-wrapper {
+    padding: 10px;
+    margin: 0;
+  }
+  .sidenav {
+    position: fixed;
+    background-color: black;
+  }
+  .sidenav li > a {
+    color: white;
+  }
+  .sidenav li:hover,
+  .mobile-nav:hover > * {
+    background-color: white;
+    color: black;
+  }
+  nav div .row {
+    margin-bottom: 0;
+  }
+  .table-name-club {
+    width: 250px;
+  }
+  .title-team {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  nav .nav-wrapper .brand-logo {
+    font-size: 7vw;
+  }
+  .table-name-club {
+    width: 200px;
+  }
+}

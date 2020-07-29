@@ -1,0 +1,50 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="description" content="Soccer News" />
+    <meta name="theme-color" content="#000000" />
+    <link
+      rel="shortcut icon"
+      href="clipart-ball-logo.png"
+      type="image/x-icon"
+    />
+    <title>Soccer News</title>
+  </head>
+  <body>
+    <nav class="navigasi nav-extended">
+      <div class="nav-wrapper row">
+        <div class="row">
+          <a href="#" class="brand-logo col" id="logo">Soccer News</a>
+        </div>
+        <a href="#" class="sidenav-trigger" data-target="nav-mobile"
+          ><i class="material-icons">menu</i></a
+        >
+        <div class="row">
+          <ul class="topnav right hide-on-med-and-down col"></ul>
+        </div>
+        <ul id="nav-mobile" class="sidenav"></ul>
+      </div>
+    </nav>
+    <noscript
+      id="bold"
+      style="position: absolute; width: 100%; text-align: center;"
+      >Please enable javascript for access this site.</noscript
+    >
+    <div class="slider fullscreen" id="slider"></div>
+    <div class="fixed-action-btn" id="reload">
+      <a
+        class="btn-floating btn-large btn-reload-clear blue-grey darken-4"
+        id="btn-reload"
+      >
+        <i class="large material-icons" id="icon-color">autorenew</i>
+      </a>
+    </div>
+    <script type="module" src="bundle.js"></script>
+  </body>
+</html>
