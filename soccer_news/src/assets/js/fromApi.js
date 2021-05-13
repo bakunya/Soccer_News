@@ -13,7 +13,7 @@ const fetchApi = (url) => {
   return fetch(url, {
     method: "GET",
     headers: {
-      "X-Auth-Token": "a278ac30977441dba32c4a833602f37b",
+      "X-Auth-Token": "",
     }
   });
 };
