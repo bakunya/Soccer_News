@@ -7,6 +7,7 @@ import {
   getSpecificTeamsApi,
   leagueStandingsApi,
   fetchApi,
+  competitionsApi,
 } from "./fromApi.js";
 
 import {
@@ -18,7 +19,34 @@ import {
   renderTeamDetail,
   renderTable,
   spinnerLoading,
+  renderNavCompetitions,
 } from "./template.js";
+
+const competitionsCache = async (baseURL) => {
+  try {
+    const loading = loadingBar();
+    document.querySelector(".container-competitions").innerHTML = loading;
+    const cache = await caches.match(`${baseURL}competitions?plan=TIER_ONE`);
+    if (cache) {
+      const responseJson = await cache.json();
+      const competitions = responseJson
+                            .competitions
+                            .map(({ id, name })  => ({ id, name }))
+                            .sort((a, b) => {
+                              let nameA = a.name.toUpperCase()
+                              let nameB = b.name.toUpperCase()
+                              if(nameA < nameB) return -1
+                              if(nameA > nameB) return 1
+                              return 0
+                            });
+      return renderNavCompetitions(competitions);
+    } else {
+      return competitionsApi(baseURL);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const leagueStandingsCache = async (baseURL, option) => {
   try {
@@ -176,4 +204,5 @@ export {
   getSpecificTeamsCaches,
   leagueStandingsCache,
   undoApi,
+  competitionsCache
 };

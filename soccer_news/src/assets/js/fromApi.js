@@ -6,6 +6,7 @@ import {
   loadTeamSchedule,
   renderTeamDetail,
   renderTable,
+  renderNavCompetitions,
 } from "./template.js";
 
 const fetchApi = (url) => {
@@ -13,7 +14,7 @@ const fetchApi = (url) => {
     method: "GET",
     headers: {
       "X-Auth-Token": "a278ac30977441dba32c4a833602f37b",
-    },
+    }
   });
 };
 
@@ -25,10 +26,37 @@ const leagueStandingsApi = async (baseURL, option) => {
     document.querySelector(".standings-title").innerHTML = "";
     const api = await fetchApi(url);
     const responseJson = await api.json();
-    const standings = responseJson.standings.filter(
-      (standing) => standing.type === "TOTAL"
-    );
-    return renderTable(standings, responseJson);
+    if(api.status > 400) {
+      return `<p style="text-align: center;">${responseJson.message}</p>`
+    } else {
+      const standings = responseJson.standings.filter(
+        (standing) => standing.type === "TOTAL"
+      );
+      return renderTable(standings, responseJson);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const competitionsApi = async (baseURL) => {
+  try {
+    const loading = loadingBar();
+    const url = `${baseURL}competitions?plan=TIER_ONE`;
+    document.querySelector(".container-competitions").innerHTML = loading;
+    const api = await fetchApi(url);
+    const responseJson = await api.json();
+    const competitions = responseJson
+                        .competitions
+                        .map(({ id, name })  => ({ id, name }))
+                        .sort((a, b) => {
+                          let nameA = a.name.toUpperCase()
+                          let nameB = b.name.toUpperCase()
+                          if(nameA < nameB) return -1
+                          if(nameA > nameB) return 1
+                          return 0
+                        });
+    return renderNavCompetitions(competitions);
   } catch (err) {
     console.error(err);
   }
@@ -124,4 +152,5 @@ export {
   getSpecificTeamsApi,
   leagueStandingsApi,
   fetchApi,
+  competitionsApi
 };

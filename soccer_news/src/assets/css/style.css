@@ -151,6 +151,43 @@ a#link:hover {
 #icon-color {
   color: #b0bec5;
 }
+.container-competitions {
+  display: flex;
+  overflow-y: auto;
+}
+.container-competitions > p {
+  background: #262626;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  color: white;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+  white-space: pre;
+}
+.img {
+  display: grid;
+  justify-items: center;
+}
+.illust_leaugestandings{
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  align-self: center;
+}
+#search {
+  margin: 50px 0;
+  font-size: 1.2rem;
+}
+#search::placeholder {
+  color: rgb(26, 26, 26);
+}
+.container-competitions > p:hover,
+.container-competitions > p:focus,
+.container-competitions > p:active {
+  transform: scale(1.1);
+}
+
 @media (max-width: 1000px) {
   nav {
     position: static;
@@ -185,6 +222,7 @@ a#link:hover {
     font-size: 2rem;
   }
 }
+
 
 @media (max-width: 400px) {
   nav .nav-wrapper .brand-logo {

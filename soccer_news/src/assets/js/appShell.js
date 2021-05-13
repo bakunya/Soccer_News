@@ -10,7 +10,10 @@ import {
   matchSchedule,
   leagueStandings,
   undo,
+  competitions,
 } from "./fetch.js";
+import { competitionsCache } from "./fromCache.js";
+import { renderNavCompetitions } from "./template.js";
 
 const conLost = "<p class='center flow-text'>Connection lost...</p>";
 
@@ -74,25 +77,33 @@ const resetNav = () => {
   document.querySelector("nav").style.position = "static";
   document.querySelector("nav").style.opacity = "1";
 };
+
 const dropDownLoad = () => {
   const elm = document.querySelector("a.dropdown-trigger");
   M.Dropdown.init(elm, { constrainWidth: false });
 };
 
+const loadApiCompetitions = async () => {
+  const result = await competitions()
+  document.querySelector('.container-competitions').innerHTML = result.nav
+  search()
+  loadApiLeagueStandings();
+}
+
 const loadApiLeagueStandings = () => {
-  let value = 2001;
-  document.querySelectorAll(".option-dropdown").forEach((elm) => {
+  document.querySelectorAll(".standings_nav").forEach((elm) => {
     elm.addEventListener("click", (e) => {
-      value = e.target.getAttribute("data-value");
+      let value = e.target.getAttribute("data-id");
       renderToPageApiLeaugeStandings(value);
     });
   });
-  renderToPageApiLeaugeStandings(value);
 };
 
 const renderToPageApiLeaugeStandings = async (value) => {
   try {
     const result = await leagueStandings(value);
+    document.querySelector(".container-table").classList.remove('img')
+    if(Boolean(result.team)) {
     document.querySelector(".container-table").innerHTML = result
       ? result.team
       : conLost;
@@ -100,6 +111,9 @@ const renderToPageApiLeaugeStandings = async (value) => {
       ? result.title
       : "";
     leagueStandingsRedirectLinks();
+    } else {
+      document.querySelector(".container-table").innerHTML = result
+    }
   } catch (error) {
     console.log(error);
   }
@@ -323,6 +337,21 @@ const loadTodayCompetitions = async () => {
   }
 };
 
+const search = () => {
+  const listData = document.querySelectorAll('.standings_nav')
+
+  document.getElementById('search').addEventListener('keyup', e => {
+    const keyword = e.target.value.toUpperCase()
+
+    listData.forEach(item => {
+      let data = item.textContent || item.innerText
+      if(data.toUpperCase().indexOf(keyword) > -1) return item.style.display = ""
+      return item.style.display = "none"
+    })
+
+  })
+}
+
 const routes = (page) => {
   switch (page) {
     case "home":
@@ -330,8 +359,7 @@ const routes = (page) => {
       break;
     case "leagueStandings":
       resetNav();
-      dropDownLoad();
-      loadApiLeagueStandings();
+      loadApiCompetitions()
       break;
     case "scheduleTeams":
       resetNav();
@@ -366,5 +394,7 @@ const routes = (page) => {
       break;
   }
 };
+
+// handle event 
 
 export { loadNav, loadPage };

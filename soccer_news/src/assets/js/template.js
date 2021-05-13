@@ -68,6 +68,14 @@ const renderTable = (clubs, standings) => {
   return { team, title };
 };
 
+const renderNavCompetitions = (competitions) => {
+  let nav = ''
+  competitions.forEach(({ id, name }) => {
+    nav += `<p data-id="${ id }" tabindex="0" class="standings_nav">${ name }</p>`
+  })
+  return { nav, competitions }
+}
+
 const renderTeamDetail = (team) => {
   const content = `
     <div class="row col l4 m5 s12">
@@ -403,6 +411,8 @@ const spinnerLoading = () => {
   </div>`;
 };
 
+const renderError = (msg) => `<p style="text-align=center;">${msg}</p>`
+
 export {
   renderAllFromDb,
   loadingBar,
@@ -413,4 +423,6 @@ export {
   renderTeamDetail,
   renderTable,
   spinnerLoading,
+  renderNavCompetitions,
+  renderError
 };

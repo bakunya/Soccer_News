@@ -7,6 +7,7 @@ import {
   getSpecificTeamsCaches,
   leagueStandingsCache,
   undoApi,
+  competitionsCache,
 } from "./fromCache.js";
 
 import { renderAllFromDb, renderTeamDetail } from "./template.js";
@@ -17,6 +18,10 @@ const baseURL = "https://api.football-data.org/v2/";
 
 const leagueStandings = (option) => {
   return leagueStandingsCache(baseURL, option);
+};
+
+const competitions = () => {
+  return competitionsCache(baseURL);
 };
 
 const matchSchedule = (id) => {
@@ -88,4 +93,5 @@ export {
   matchSchedule,
   leagueStandings,
   undo,
+  competitions
 };

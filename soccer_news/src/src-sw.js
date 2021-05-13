@@ -48,7 +48,13 @@ workbox.precaching.precacheAndRoute([
 
 workbox.routing.registerRoute(
   /https:\/\/api\.football-data\.org\/v2/,
-  new workbox.strategies.NetworkFirst()
+  new workbox.strategies.NetworkFirst({
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxAgeSeconds: 10,
+      }),
+    ]
+  })
 );
 
 workbox.routing.registerRoute(
